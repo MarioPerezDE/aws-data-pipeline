@@ -155,3 +155,15 @@ Planned enhancements for this pipeline:
 - Add **CI/CD deployment** for Lambda updates
 - Convert infrastructure setup to **Terraform or AWS SAM**
 - Add monitoring and alerting
+## Author
+
+Mario Perez  
+
+This project is part of a hands-on effort to strengthen cloud data engineering skills using real-world patterns and tools.
+
+Focus areas:
+- AWS serverless architecture
+- Data ingestion pipelines
+- S3 data lake structure
+- Automation and scheduling
+- Preparing for Snowflake integration

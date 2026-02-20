@@ -38,3 +38,27 @@ Example object:
 s3://mario-data-lab-bucket/raw-data/garmin-json/activity_21902387704.json
 
 This prefix represents the **raw data layer** of the pipeline.
+## Scheduling
+
+The pipeline runs automatically using **Amazon EventBridge**, which triggers the AWS Lambda function on a schedule.
+
+### Current Schedule
+The Lambda function runs **once per day at 6:00 AM (Central Time)**.
+
+EventBridge uses **UTC**, so the cron expression is:
+cron(0 12 * * ? *)
+
+Explanation:
+
+- `0` → minute  
+- `12` → hour (12 UTC = 6 AM Central)  
+- `*` → every day  
+- `?` → no specific weekday  
+
+### Flow
+
+EventBridge (schedule)
+→ triggers
+AWS Lambda (`garmin-to-s3`)
+→ pulls Garmin activities
+→ uploads JSON files to S3

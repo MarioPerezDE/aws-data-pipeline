@@ -76,3 +76,23 @@ The Lambda function performs the following steps each time it runs:
    - If it does not exist → upload the JSON file to S3
 
 This ensures the pipeline can run repeatedly without duplicating data.
+## Run Locally (Development)
+
+### Prerequisites
+- Python 3.10+
+- AWS CLI configured with a profile that can write to S3
+- Garmin credentials
+
+### Install dependencies
+
+pip install garminconnect boto3 requests
+Configure environment variables (recommended)
+
+### Set these in your terminal before running:
+
+export GARMIN_EMAIL="your_email"
+export GARMIN_PASSWORD="your_password"
+export AWS_PROFILE="mario-admin"
+### Run the script
+python pull_garmin_to_s3.py
+Note: Do not commit real credentials to GitHub. Use environment variables or AWS secrets.

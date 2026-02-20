@@ -114,3 +114,23 @@ This project is deployed as an AWS Lambda function with a Lambda Layer for depen
 - Lambda expects the handler to be:  
   `lambda_function.lambda_handler`
 - Dependencies should be in the Layer (not bundled into the function zip) to avoid platform/compiled-library issues.
+## Troubleshooting
+
+### 1) `Runtime.ImportModuleError: No module named 'pydantic_core._pydantic_core'`
+Cause: Dependencies were built on Windows instead of an Amazon Linux environment compatible with Lambda.
+
+Fix: Build the Lambda Layer inside an Amazon Linux container (Docker) and re-upload the Layer.
+
+---
+
+### 2) Lambda timed out during Garmin login
+Cause: Default Lambda timeout (3 seconds) is too low for Garmin login + API calls.
+
+Fix: Increase the Lambda timeout to **30–60 seconds** and use at least **256 MB** memory.
+
+---
+
+### 3) `403 Forbidden` on `HeadObject`
+Cause: AWS credentials/profile used by the runtime lacked S3 permission (or wrong profile).
+
+Fix: Ensure Lambda role has S3 read/write permissions for the bucket/prefix and verify the correct AWS profile locally.

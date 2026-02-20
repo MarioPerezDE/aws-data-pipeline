@@ -25,3 +25,16 @@ Garmin API → AWS Lambda → Amazon S3 → Scheduled by EventBridge
 - **Amazon S3** — Stores activity JSON files
 - **Amazon EventBridge** — Schedules the daily execution
 - **IAM** — Controls permissions for Lambda to access S3
+## S3 Data Structure
+
+Activity files are stored in the following S3 location:
+### Terminology
+
+- **Bucket**: `mario-data-lab-bucket`
+- **Prefix (folder path)**: `raw-data/garmin-json/`
+- **Object (file)**: `activity_<id>.json`
+
+Example object:
+s3://mario-data-lab-bucket/raw-data/garmin-json/activity_21902387704.json
+
+This prefix represents the **raw data layer** of the pipeline.

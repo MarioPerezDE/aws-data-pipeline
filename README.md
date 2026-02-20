@@ -134,3 +134,13 @@ Fix: Increase the Lambda timeout to **30–60 seconds** and use at least **256 M
 Cause: AWS credentials/profile used by the runtime lacked S3 permission (or wrong profile).
 
 Fix: Ensure Lambda role has S3 read/write permissions for the bucket/prefix and verify the correct AWS profile locally.
+## Cost
+
+This pipeline is designed to be very low cost.
+
+At the current scale (daily schedule + a few JSON files per week), usage typically stays within the AWS Free Tier or costs only a few cents per month.
+
+Primary cost drivers:
+- Lambda runtime duration (seconds per run)
+- S3 storage (small JSON objects)
+- CloudWatch logs (set log retention to control this)

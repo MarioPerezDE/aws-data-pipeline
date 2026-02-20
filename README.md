@@ -62,3 +62,17 @@ EventBridge (schedule)
 AWS Lambda (`garmin-to-s3`)
 → pulls Garmin activities
 → uploads JSON files to S3
+## Lambda Function Behavior
+
+The Lambda function performs the following steps each time it runs:
+
+1. Authenticate to the Garmin API
+2. Pull the 50 most recent activities
+3. Filter activities to the last `DAYS_BACK` days
+4. For each activity:
+   - Build an S3 key: `raw-data/garmin-json/activity_<activity_id>.json`
+   - Check if the object already exists in S3 (`head_object`)
+   - If it exists → skip (idempotent behavior)
+   - If it does not exist → upload the JSON file to S3
+
+This ensures the pipeline can run repeatedly without duplicating data.

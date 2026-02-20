@@ -17,3 +17,11 @@ Garmin API → AWS Lambda → Amazon S3 → Scheduled by EventBridge
 2. The Lambda function logs into Garmin and pulls recent activities.
 3. Each activity is converted to JSON.
 4. Files are written to an S3 bucket:
+5. Existing files are skipped to prevent duplicates.
+
+### AWS Services Used
+
+- **AWS Lambda** — Runs the Python ingestion script
+- **Amazon S3** — Stores activity JSON files
+- **Amazon EventBridge** — Schedules the daily execution
+- **IAM** — Controls permissions for Lambda to access S3

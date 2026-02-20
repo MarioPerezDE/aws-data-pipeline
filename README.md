@@ -96,3 +96,21 @@ export AWS_PROFILE="mario-admin"
 ### Run the script
 python pull_garmin_to_s3.py
 Note: Do not commit real credentials to GitHub. Use environment variables or AWS secrets.
+## Deploy to AWS (Lambda + Layer)
+
+This project is deployed as an AWS Lambda function with a Lambda Layer for dependencies.
+
+### High-level steps
+
+1. **Create a Lambda Layer** containing Python dependencies (built for Amazon Linux / Lambda runtime).
+2. **Upload the Lambda function zip** containing:
+   - `lambda_function.py`
+   - `pull_garmin_to_s3.py`
+3. **Attach the Layer** to the Lambda function.
+4. Set Lambda **timeout** (recommended: 30–60 seconds).
+5. Add an **EventBridge schedule** to trigger the Lambda daily.
+
+### Notes
+- Lambda expects the handler to be:  
+  `lambda_function.lambda_handler`
+- Dependencies should be in the Layer (not bundled into the function zip) to avoid platform/compiled-library issues.

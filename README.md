@@ -144,3 +144,14 @@ Primary cost drivers:
 - Lambda runtime duration (seconds per run)
 - S3 storage (small JSON objects)
 - CloudWatch logs (set log retention to control this)
+## Roadmap / Future Improvements
+
+Planned enhancements for this pipeline:
+
+- Add a **processed-data layer** in S3
+- Load data into **Snowflake** for analytics
+- Add **data transformation step** (Lambda or Snowflake task)
+- Build **Power BI dashboard** for run metrics
+- Add **CI/CD deployment** for Lambda updates
+- Convert infrastructure setup to **Terraform or AWS SAM**
+- Add monitoring and alerting
